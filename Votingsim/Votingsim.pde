@@ -1,10 +1,6 @@
 int q;
-int r;
 int p = 0;
-int a = 0;
 int win = 0;
-float s;
-float w;
 float opinionX;
 float opinionY;
 int opinionwith = 30;
@@ -16,14 +12,13 @@ float[][] players = new float[10][4]; //x = [0], y = [1]
 float[][] opinion = new float[10][4];      //also mannualy adjust for players opinion[q][0] = x position opinion[p][y] = y position
 float[][] opinionvote = new float[5][4];  //  places of the opinion that can be voted on
 float[] distance = new float[4]; //mannualy adjust for amount of players (if you add a bunch you'll get 0 return in the min()function bc it does not call the rest arrays 'NULL' but 0) 
-float  vote;  //   the random selected vote
-float  min_distance;
 
 int setplayeramount = 4; //maximum is 4
 int playerwith = 40;
 
 void setup() {
   size(800, 800); // use this to change window size
+  frameRate(1);
   backgroundset(); //make background
   setplayersup();
   drawPlayers();
@@ -46,8 +41,9 @@ void draw() {
   } else {
     textSize(32);
     fill(0);
-    text("WON", width/2, height/2);
-    text(count, (width/2)+200, height/2);
+    String won = "Number of iterations: " + str(count);
+    text(won, width/2, height/2);
+    noLoop(); // stops execution
   }
 }
 
@@ -95,7 +91,7 @@ void win() {
 
 void setwinnerpoint() {
   p = 0;
-  a = 0;
+  int a = 0;
   q = 0;
   while (p < setplayeramount) {
     a = a + int(players[p][0]);
@@ -141,7 +137,8 @@ void opinions() {
 void StartFilter() { //start filter
   q = 0;
   p = 0;
-  r = 0;
+  int r = 0;
+  float s;
   while (q < (setplayeramount /2)) {
     s = min(distance);
     //print(s + "       ");
@@ -165,7 +162,7 @@ void StartFilter() { //start filter
 void voting() {
   p = 0;
   while (p < setplayeramount) { 
-    w = random(setplayeramount/2);
+    float w = random(setplayeramount/2);
     print("this is w " + w + "    ");
     q = int(w);
     println("this is q " + q);
